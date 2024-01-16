@@ -45,7 +45,17 @@ df_citas=pd.DataFrame(citas_creadas,columns=variables)
 df_cambios=pd.DataFrame(cambio_de_estado_de_citas,columns=variables)
 
 df_ventas_marginal=df_ventas.copy()
-df_ventas_marginal.iloc[:, 2:] = df_ventas.iloc[:, 2:].diff(axis=1).fillna(0)
+i=1
+while i<len(df_ventas):
+    if i==1:
+    
+        df_ventas_marginal.iloc[i]=np.zeros(len(df_ventas))
+        
+    else:
+        df_ventas_marginal.iloc[i]=df_ventas.iloc[i]-df_ventas.iloc[i-1]
+    i+=1
+    
+
 
 df_citas_marginal = df_citas.copy()
 df_citas_marginal.iloc[:, 2:] = df_citas.iloc[:, 2:].diff(axis=1).fillna(0)
