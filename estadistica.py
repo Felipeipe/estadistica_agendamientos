@@ -3,74 +3,43 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-variables=['Recepcionista','18_12_2023','5_01_2024','15_01_2024']
-
-ventas_ingresadas = [['Alejandro', 564, 686, 753], 
-                     ['Camila', 442, 601, 655], 
-                     ['Betty', 1171, 1224, 1276], 
-                     ['Felipe', 2757, 2764, 2771]]
-
-
-citas_creadas = [['Alejandro', 630, 784, 877], 
-                ['Camila', 530, 739, 836], 
-                ['Betty', 914, 979, 1044], 
-                ['Felipe', 2778, 2789, 2799]]
-
-
-cambio_de_estado_de_citas=[['Alejandro', 1826, 2293, 2525], 
-                           ['Camila', 1269, 1716, 1910], 
-                           ['Betty', 3019, 3196, 3373], 
-                           ['Felipe', 6672, 6688, 6704]]
-
-cita_marginal =[['Alejandro', 0, 154, 93], 
-                ['Camila', 0, 209, 97], 
-                ['Betty', 0, 65, 65], 
-                ['Felipe', 0, 65, 65]]
-
-venta_marginal= [['Alejandro', 0, 122, 67], 
-                ['Camila', 0, 159, 54], 
-                ['Betty', 0, 53, 52], 
-                ['Felipe', 0, 7, 7]]
-
-
-cambio_marginal=[['Alejandro', 0, 467, 232], 
-                ['Camila', 0, 447, 194], 
-                ['Betty', 0, 177, 176], 
-                ['Felipe', 0, 15, 16]]
+ventas_ingresadas=pd.read_excel("ventas_ingresadas.xlsx",index_col=None)
+citas_creadas=pd.read_excel("citas_creadas.xlsx",index_col=None)
+cambio_estado=pd.read_excel("cambios_de_estado_de_cita.xlsx",index_col=None)
+dias_trabajados=pd.read_excel("dias_trabajados.xlsx",index_col=None)
 
 
 
-df_ventas=pd.DataFrame(ventas_ingresadas,columns=variables)
-df_citas=pd.DataFrame(citas_creadas,columns=variables)
-df_cambios=pd.DataFrame(cambio_de_estado_de_citas,columns=variables)
+diff_ventas=ventas_ingresadas.copy()
+diff_citas=citas_creadas.copy()
+diff_cambio=cambio_estado.copy()
 
-df_ventas_marginal=df_ventas.copy()
-i=1
-while i<len(df_ventas):
-    if i==1:
-    
-        df_ventas_marginal.iloc[i]=np.zeros(len(df_ventas))
-        
-    else:
-        df_ventas_marginal.iloc[i]=df_ventas.iloc[i]-df_ventas.iloc[i-1]
+
+
+i=2
+diff_ventas[diff_ventas.columns[1]]=np.zeros(len(diff_ventas))
+while i<len(ventas_ingresadas):
+    diff_ventas[diff_ventas.columns[i]]=(ventas_ingresadas[ventas_ingresadas.columns[i]]-ventas_ingresadas[ventas_ingresadas.columns[i-1]])*1/dias_trabajados[dias_trabajados.columns[i]]
     i+=1
-    
 
+i=2
+diff_citas[diff_citas.columns[1]]=np.zeros(len(diff_citas))
+while i<len(citas_creadas):
+    diff_citas[diff_citas.columns[i]]=(citas_creadas[citas_creadas.columns[i]]-citas_creadas[citas_creadas.columns[i-1]])*1/dias_trabajados[dias_trabajados.columns[i]]
+    i+=1
 
-df_citas_marginal = df_citas.copy()
-df_citas_marginal.iloc[:, 2:] = df_citas.iloc[:, 2:].diff(axis=1).fillna(0)
-
-df_cambios_marginal = df_cambios.copy()
-df_cambios_marginal.iloc[:, 2:] = df_cambios.iloc[:, 2:].diff(axis=1).fillna(0)
-
-
+i=2
+diff_cambio[diff_cambio.columns[1]]=np.zeros(len(diff_cambio))
+while i<len(cambio_estado):
+    diff_cambio[diff_cambio.columns[i]]=(cambio_estado[cambio_estado.columns[i]]-cambio_estado[cambio_estado.columns[i-1]])*1/dias_trabajados[dias_trabajados.columns[i]]
+    i+=1
 
 
 
 # Graficar datos de ventas
 plt.figure(figsize=(10, 6))
-for i in range(len(df_ventas_marginal)):
-    plt.plot(df_ventas_marginal.columns[1:], df_ventas_marginal.iloc[i, 1:], marker='o', label=df_ventas_marginal['Recepcionista'][i])
+for i in range(len(diff_ventas)):
+    plt.plot(diff_ventas.columns[1:], diff_ventas.iloc[i, 1:], marker='o', label=diff_ventas['Recepcionista'][i])
 
 plt.title('Ventas Ingresadas')
 plt.xlabel('Fechas')
@@ -81,8 +50,8 @@ plt.show()
 
 # Graficar datos de citas
 plt.figure(figsize=(10, 6))
-for i in range(len(df_citas_marginal)):
-    plt.plot(df_citas_marginal.columns[1:], df_citas_marginal.iloc[i, 1:], marker='o', label=df_citas_marginal['Recepcionista'][i])
+for i in range(len(diff_citas)):
+    plt.plot(diff_citas.columns[1:], diff_citas.iloc[i, 1:], marker='o', label=diff_citas['Recepcionista'][i])
 
 plt.title('Citas Creadas')
 plt.xlabel('Fechas')
@@ -93,8 +62,8 @@ plt.show()
 
 # Graficar datos de cambios de estado de citas
 plt.figure(figsize=(10, 6))
-for i in range(len(df_cambios_marginal)):
-    plt.plot(df_cambios_marginal.columns[1:], df_cambios_marginal.iloc[i, 1:], marker='o', label=df_cambios_marginal['Recepcionista'][i])
+for i in range(len(diff_cambio)):
+    plt.plot(diff_cambio.columns[1:], diff_cambio.iloc[i, 1:], marker='o', label=diff_cambio['Recepcionista'][i])
 
 plt.title('Cambios de Estado de Citas')
 plt.xlabel('Fechas')
@@ -102,3 +71,4 @@ plt.ylabel('Cambios de Estado')
 plt.legend()
 plt.grid(True)
 plt.show()
+
