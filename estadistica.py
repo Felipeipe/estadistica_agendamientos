@@ -18,19 +18,19 @@ diff_cambio=cambio_estado.copy()
 
 i=2
 diff_ventas[diff_ventas.columns[1]]=np.zeros(len(diff_ventas))
-while i<len(ventas_ingresadas):
+while i<len(ventas_ingresadas.columns):
     diff_ventas[diff_ventas.columns[i]]=(ventas_ingresadas[ventas_ingresadas.columns[i]]-ventas_ingresadas[ventas_ingresadas.columns[i-1]])*1/dias_trabajados[dias_trabajados.columns[i]]
     i+=1
 
 i=2
 diff_citas[diff_citas.columns[1]]=np.zeros(len(diff_citas))
-while i<len(citas_creadas):
+while i<len(citas_creadas.columns):
     diff_citas[diff_citas.columns[i]]=(citas_creadas[citas_creadas.columns[i]]-citas_creadas[citas_creadas.columns[i-1]])*1/dias_trabajados[dias_trabajados.columns[i]]
     i+=1
 
 i=2
 diff_cambio[diff_cambio.columns[1]]=np.zeros(len(diff_cambio))
-while i<len(cambio_estado):
+while i<len(cambio_estado.columns):
     diff_cambio[diff_cambio.columns[i]]=(cambio_estado[cambio_estado.columns[i]]-cambio_estado[cambio_estado.columns[i-1]])*1/dias_trabajados[dias_trabajados.columns[i]]
     i+=1
 
