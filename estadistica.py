@@ -14,6 +14,12 @@ diff_ventas=ventas_ingresadas.copy()
 diff_citas=citas_creadas.copy()
 diff_cambio=cambio_estado.copy()
 
+def difference(df,ventas_ingresadas,dias_trabajados):
+    j=2
+    df[df.columns[1]]=np.zeros(len(df))
+    while j<len(df.columns):
+        j+=1
+    pass
 
 
 i=2
