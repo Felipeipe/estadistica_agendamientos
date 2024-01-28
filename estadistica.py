@@ -49,7 +49,7 @@ for i in range(len(diff_ventas)):
 
 plt.title('Ventas Ingresadas')
 plt.xlabel('Fechas')
-plt.ylabel('Ventas')
+plt.ylabel('Ventas diarias en promedio')
 plt.legend()
 plt.grid(True)
 plt.show()
@@ -61,7 +61,7 @@ for i in range(len(diff_citas)):
 
 plt.title('Citas Creadas')
 plt.xlabel('Fechas')
-plt.ylabel('Citas')
+plt.ylabel('Agendamiento diario promedio')
 plt.legend()
 plt.grid(True)
 plt.show()
