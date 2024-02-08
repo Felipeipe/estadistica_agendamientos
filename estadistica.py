@@ -14,12 +14,14 @@ diff_ventas=ventas_ingresadas.copy()
 diff_citas=citas_creadas.copy()
 diff_cambio=cambio_estado.copy()
 
-def difference(df,ventas_ingresadas,dias_trabajados):
+def difference(df:pd.DataFrame,df2:pd.Dataframe,dt:pd.DataFrame)-> pd.DataFrame:
     j=2
-    df[df.columns[1]]=np.zeros(len(df))
-    while j<len(df.columns):
+    df0=df.copy()
+    df0.iloc[:,]=np.zeros(len(df.iloc[:,1]))
+    while j < len(df.columns):
+        df.iloc[:,j]=(df2.iloc[:,j]-df2.iloc[:,j-1])/dt.iloc[]
         j+=1
-    pass
+    pass 
 
 
 i=2
