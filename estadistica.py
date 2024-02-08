@@ -14,17 +14,20 @@ diff_ventas=ventas_ingresadas.copy()
 diff_citas=citas_creadas.copy()
 diff_cambio=cambio_estado.copy()
 
-"""
-def difference(df:pd.DataFrame,df2:pd.Dataframe,dt:pd.DataFrame)-> pd.DataFrame:
+
+def difference(df:pd.DataFrame,dt:pd.DataFrame)-> pd.DataFrame:
     j=2
     df0=df.copy()
-    df0.iloc[:,]=np.zeros(len(df.iloc[:,1]))
+    df0[df0.columns[1]]=np.zeros(len(df0))
     while j < len(df.columns):
-        df.iloc[:,j]=(df2.iloc[:,j]-df2.iloc[:,j-1])/dt.iloc[]
+        df0[df0.columns[j]]=(df[df.columns[j]]-df[df.columns[j-1]])/dt[dt.columns[j]]
         j+=1
-    pass 
-"""
+    return df0
 
+diff_ventas=difference(ventas_ingresadas,dias_trabajados)
+diff_citas=difference(citas_creadas,dias_trabajados)
+diff_cambio=difference(cambio_estado,dias_trabajados)
+"""
 i=2
 diff_ventas[diff_ventas.columns[1]]=np.zeros(len(diff_ventas))
 while i<len(ventas_ingresadas.columns):
@@ -44,7 +47,7 @@ while i<len(cambio_estado.columns):
     i+=1
 
 
-
+"""
 # Graficar datos de ventas
 plt.figure(figsize=(10, 6))
 for i in range(len(diff_ventas)):
