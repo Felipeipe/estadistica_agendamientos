@@ -14,6 +14,7 @@ diff_ventas=ventas_ingresadas.copy()
 diff_citas=citas_creadas.copy()
 diff_cambio=cambio_estado.copy()
 
+"""
 def difference(df:pd.DataFrame,df2:pd.Dataframe,dt:pd.DataFrame)-> pd.DataFrame:
     j=2
     df0=df.copy()
@@ -22,7 +23,7 @@ def difference(df:pd.DataFrame,df2:pd.Dataframe,dt:pd.DataFrame)-> pd.DataFrame:
         df.iloc[:,j]=(df2.iloc[:,j]-df2.iloc[:,j-1])/dt.iloc[]
         j+=1
     pass 
-
+"""
 
 i=2
 diff_ventas[diff_ventas.columns[1]]=np.zeros(len(diff_ventas))
