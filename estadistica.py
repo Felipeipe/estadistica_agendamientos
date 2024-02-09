@@ -10,12 +10,11 @@ dias_trabajados=pd.read_excel("dias_trabajados.xlsx",index_col=None)
 
 
 
-diff_ventas=ventas_ingresadas.copy()
-diff_citas=citas_creadas.copy()
-diff_cambio=cambio_estado.copy()
 
-
-def difference(df:pd.DataFrame,dt:pd.DataFrame)-> pd.DataFrame:
+def difference(df:pd.DataFrame,dt:pd.DataFrame) -> pd.DataFrame:
+    """
+    Calcula la variación promedio entre dos columnas, ponderados por un DataFrame 
+    """
     j=2
     df0=df.copy()
     df0[df0.columns[1]]=np.zeros(len(df0))
@@ -27,27 +26,8 @@ def difference(df:pd.DataFrame,dt:pd.DataFrame)-> pd.DataFrame:
 diff_ventas=difference(ventas_ingresadas,dias_trabajados)
 diff_citas=difference(citas_creadas,dias_trabajados)
 diff_cambio=difference(cambio_estado,dias_trabajados)
-"""
-i=2
-diff_ventas[diff_ventas.columns[1]]=np.zeros(len(diff_ventas))
-while i<len(ventas_ingresadas.columns):
-    diff_ventas[diff_ventas.columns[i]]=(ventas_ingresadas[ventas_ingresadas.columns[i]]-ventas_ingresadas[ventas_ingresadas.columns[i-1]])*1/dias_trabajados[dias_trabajados.columns[i]]
-    i+=1
-
-i=2
-diff_citas[diff_citas.columns[1]]=np.zeros(len(diff_citas))
-while i<len(citas_creadas.columns):
-    diff_citas[diff_citas.columns[i]]=(citas_creadas[citas_creadas.columns[i]]-citas_creadas[citas_creadas.columns[i-1]])*1/dias_trabajados[dias_trabajados.columns[i]]
-    i+=1
-
-i=2
-diff_cambio[diff_cambio.columns[1]]=np.zeros(len(diff_cambio))
-while i<len(cambio_estado.columns):
-    diff_cambio[diff_cambio.columns[i]]=(cambio_estado[cambio_estado.columns[i]]-cambio_estado[cambio_estado.columns[i-1]])*1/dias_trabajados[dias_trabajados.columns[i]]
-    i+=1
 
 
-"""
 # Graficar datos de ventas
 plt.figure(figsize=(10, 6))
 for i in range(len(diff_ventas)):
