@@ -1,12 +1,15 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import os
+
+path=os.path.join(os.getcwd(),"datos")
 
 
-ventas_ingresadas=pd.read_excel("ventas_ingresadas.xlsx",index_col=None)
-citas_creadas=pd.read_excel("citas_creadas.xlsx",index_col=None)
-cambio_estado=pd.read_excel("cambios_de_estado_de_cita.xlsx",index_col=None)
-dias_trabajados=pd.read_excel("dias_trabajados.xlsx",index_col=None)
+ventas_ingresadas=pd.read_excel(os.path.join(path,"ventas_ingresadas.xlsx"),index_col=None)
+citas_creadas=pd.read_excel(os.path.join(path,"citas_creadas.xlsx"),index_col=None)
+cambio_estado=pd.read_excel(os.path.join(path,"cambios_de_estado_de_cita.xlsx"),index_col=None)
+dias_trabajados=pd.read_excel(os.path.join(path,"dias_trabajados.xlsx"),index_col=None)
 
 
 
@@ -26,7 +29,6 @@ def difference(df:pd.DataFrame,dt:pd.DataFrame) -> pd.DataFrame:
 diff_ventas=difference(ventas_ingresadas,dias_trabajados)
 diff_citas=difference(citas_creadas,dias_trabajados)
 diff_cambio=difference(cambio_estado,dias_trabajados)
-
 
 # Graficar datos de ventas
 plt.figure(figsize=(10, 6))
