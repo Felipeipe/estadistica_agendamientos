@@ -6,10 +6,10 @@ import os
 path=os.path.join(os.getcwd(),"datos")
 
 
-ventas_ingresadas=pd.read_excel(os.path.join(path,"ventas_ingresadas.xlsx"),index_col=None)
-citas_creadas=pd.read_excel(os.path.join(path,"citas_creadas.xlsx"),index_col=None)
-cambio_estado=pd.read_excel(os.path.join(path,"cambios_de_estado_de_cita.xlsx"),index_col=None)
-dias_trabajados=pd.read_excel(os.path.join(path,"dias_trabajados.xlsx"),index_col=None)
+ventas_ingresadas:pd.DataFrame = pd.read_excel(os.path.join(path,"ventas_ingresadas.xlsx"),index_col=None)
+citas_creadas:pd.DataFrame     = pd.read_excel(os.path.join(path,"citas_creadas.xlsx"),index_col=None)
+cambio_estado:pd.DataFrame     = pd.read_excel(os.path.join(path,"cambios_de_estado_de_cita.xlsx"),index_col=None)
+dias_trabajados:pd.DataFrame   = pd.read_excel(os.path.join(path,"dias_trabajados.xlsx"),index_col=None)
 
 
 
@@ -26,43 +26,31 @@ def difference(df:pd.DataFrame,dt:pd.DataFrame) -> pd.DataFrame:
         j+=1
     return df0
 
-diff_ventas=difference(ventas_ingresadas,dias_trabajados)
-diff_citas=difference(citas_creadas,dias_trabajados)
-diff_cambio=difference(cambio_estado,dias_trabajados)
+def graph(df:pd.DataFrame, titulo:str, xlabel:str, ylabel:str) -> None:
+    """Graficador de recepcionistas
+    """
+    plt.figure(figsize=(10, 6))
+    for i in range(len(df)):
+        plt.plot(df.columns[1:], df.iloc[i, 1:], marker='o', label=df['Recepcionista'][i])
+
+    plt.title(titulo)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.legend(loc='best')
+    plt.grid(True)
+    plt.show()
+    pass
+
+
+diff_ventas:pd.DataFrame = difference(ventas_ingresadas,dias_trabajados)
+diff_citas:pd.DataFrame  = difference(citas_creadas,dias_trabajados)
+diff_cambio:pd.DataFrame = difference(cambio_estado,dias_trabajados)
 
 # Graficar datos de ventas
-plt.figure(figsize=(10, 6))
-for i in range(len(diff_ventas)):
-    plt.plot(diff_ventas.columns[1:], diff_ventas.iloc[i, 1:], marker='o', label=diff_ventas['Recepcionista'][i])
+graph(diff_ventas,"Ventas diarias promedio",'Fechas', 'N° de ventas')
 
-plt.title('Ventas Ingresadas')
-plt.xlabel('Fechas')
-plt.ylabel('Ventas diarias en promedio')
-plt.legend()
-plt.grid(True)
-plt.show()
+# Graficar Citas creadas por secretario
+graph(diff_citas,"citas agendadas diariamente promedio",'Fechas', 'N° de citas')
 
-# Graficar datos de citas
-plt.figure(figsize=(10, 6))
-for i in range(len(diff_citas)):
-    plt.plot(diff_citas.columns[1:], diff_citas.iloc[i, 1:], marker='o', label=diff_citas['Recepcionista'][i])
-
-plt.title('Citas Creadas')
-plt.xlabel('Fechas')
-plt.ylabel('Agendamiento diario promedio')
-plt.legend()
-plt.grid(True)
-plt.show()
-
-# Graficar datos de cambios de estado de citas
-plt.figure(figsize=(10, 6))
-for i in range(len(diff_cambio)):
-    plt.plot(diff_cambio.columns[1:], diff_cambio.iloc[i, 1:], marker='o', label=diff_cambio['Recepcionista'][i])
-
-plt.title('Cambios de Estado de Citas')
-plt.xlabel('Fechas')
-plt.ylabel('Cambios de Estado')
-plt.legend()
-plt.grid(True)
-plt.show()
-
+# Gráfico de datos de cambio de estado de citas
+graph(diff_cambio,"cambio de estado diario promedio",'Fechas','N° de cambios de estado')
