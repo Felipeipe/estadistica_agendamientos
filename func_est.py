@@ -64,12 +64,16 @@ def promedio(df:pd.DataFrame,index:int)->float:
 
 def generador_promedio(df:pd.DataFrame)->pd.DataFrame:
     df0=df.copy()
-    L=[]
-    for i in range(len(df.columns)):
-        if i==0:
-            L.append("Promedio")
+    D={}
+    for i,key in enumerate(df.columns.to_list()):
+        if key=="Recepcionista":
+            D[key]="Promedio"
             continue
-        L.append(promedio(df0,i))
-    df0=df0.append(L,ignore_index=True)
+        D[key]=promedio(df0,i)
+    # Crear una nueva fila con los valores calculados
+    nueva_fila = pd.DataFrame(D, index=[len(df)])  # Usando la longitud del DataFrame como índice
+    # Concatenar el DataFrame original con la nueva fila
+    df0 = pd.concat([df0, nueva_fila])
     return df0
+
 
