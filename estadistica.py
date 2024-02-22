@@ -9,7 +9,6 @@ citas_creadas:pd.DataFrame     = func.lecturaDeExcels("citas_creadas.xlsx",path)
 cambio_estado:pd.DataFrame     = func.lecturaDeExcels("cambios_de_estado_de_cita.xlsx",path)
 dias_trabajados:pd.DataFrame   = func.lecturaDeExcels("dias_trabajados.xlsx",path)
 
-print(dias_trabajados.columns)
 
 
 diff_ventas:pd.DataFrame = func.generador_promedio(func.difference(ventas_ingresadas,dias_trabajados))
