@@ -4,7 +4,7 @@ import numpy as np
 import os
 
 def lecturaDeExcels(name:str,ruta:str)->pd.DataFrame:
-    """Lee un excelñ de una ruta en especifico, de un nombre 'name'
+    """Lee un excel de una ruta en especifico, de un nombre 'name'
     """
     df=pd.read_excel(os.path.join(ruta,f"{name}"),index_col=None)
     return df
@@ -47,3 +47,29 @@ def graphAll(df:pd.DataFrame, titulo:str, xlabel:str, ylabel:str)->None:
     plt.legend(loc='best')
     plt.grid(True)
     plt.show()
+    pass
+
+
+def promedio(df:pd.DataFrame,index:int)->float:
+    """
+    calcula el promedio de una columna de los DataFrame que
+    se están trabajando
+    """
+    if index<1:
+        raise IndexError("indice debe ser mayor o igual que 1")
+    suma=sum(df[df.columns[index]])
+    n=len(df[df.columns[index]])
+    prom=suma/n
+    return prom
+
+def generador_promedio(df:pd.DataFrame)->pd.DataFrame:
+    df0=df.copy()
+    L=[]
+    for i in range(len(df.columns)):
+        if i==0:
+            L.append("Promedio")
+            continue
+        L.append(promedio(df0,i))
+    df0=df0.append(L,ignore_index=True)
+    return df0
+
