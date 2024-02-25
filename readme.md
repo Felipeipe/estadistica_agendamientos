@@ -3,10 +3,6 @@
 ![Hola](RecursosReadme/logo_retina-crecer.png)
 
 ---
-Felipe González Poblete
-
-felipe.gonzalez@crecerbien.cl
----
 
 Este proyecto consiste en el uso de algunas librerias de Python y la recopilación de los logros del sistema de agendas [Reservo](https://reservo.cl). El objetivo principal de este proyecto es medir de manera correcta y fidedigna el rendimiento de los recepcionistas.
 
@@ -22,7 +18,7 @@ Por el momento este proyecto solamente funciona en Windows, ya que es la forma q
 
 Primeramente, se debe verificar que el [script de instalación](Configuracion.ps1) se pueda ejecutar, esto puede ser realizado de la siguiente manera:
 
-### Abrir PowerShell como Administrador:
+### Abrir PowerShell como Administrador
 
 Para lograr esto, debes:
 
@@ -54,7 +50,7 @@ Ahora se puede cerrar la terminal y continuar con la ejecución del script
 
 Luego, debes ir a la carpeta principal y buscar el script llamado ["configuracion"](Configuracion.ps1), para luego hacer click derecho sobre él y poner "Ejecutar con powershell".
 
-## Ejecución del código.
+## Ejecución del código
 
 Para poder ejecutar el código, se deben tener en cuenta 2 cosas:
 
