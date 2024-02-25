@@ -2,7 +2,7 @@ import func_est as func
 import pandas as pd
 import os
 
-path=os.path.join(os.getcwd(),"datos")
+path:str =os.path.join(os.getcwd(),"datos")
 
 ventas_ingresadas:pd.DataFrame = func.lecturaDeExcels("ventas_ingresadas.xlsx",path)
 citas_creadas:pd.DataFrame     = func.lecturaDeExcels("citas_creadas.xlsx",path)
