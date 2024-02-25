@@ -61,4 +61,8 @@ Para poder ejecutar el código, se deben tener en cuenta 2 cosas:
 1. Que archivo hay que ejecutar
 2. La forma que se deben ingresar los datos de agendamiento
 
-Lo bueno es que ya se puede ejecutar el script de manera inmediata luego de 
+Lo bueno es que ya se puede ejecutar el script de manera inmediata, ya que ciertos datos ya han sido ingresados a los excel ubicados [aquí.](datos/citas_creadas.xlsx)
+
+El archivo que debes ejecutar es el que se llama ["estadistica.py"](estadistica.py)
+
+## Ingreso de datos
