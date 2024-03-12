@@ -21,20 +21,21 @@ def difference(df:pd.DataFrame,dt:pd.DataFrame) -> pd.DataFrame:
         j+=1
     return df0
 
-"""
-def graph(df:pd.DataFrame, recepcionista:str, titulo:str, xlabel:str, ylabel:str) -> None:
-    plt.figure(figsize=(10, 6))
-    plt.plot(df.columns[1:], df.loc[f"{recepcionista}", 1:], marker='o', label=f"{recepcionista}")
-    plt.plot(df.columns[1:], df.loc["Promedio", 1:], marker='o', label="Promedio")
-    plt.title(titulo)
-    plt.xlabel(xlabel)
-    plt.ylabel(ylabel)
-    plt.legend(loc='best')
-    plt.grid(True)
-    plt.show()
-    pass
-"""
-def graphAll(df:pd.DataFrame, titulo:str, xlabel:str, ylabel:str)->None:
+
+def graph(df:pd.DataFrame, titulo:str, ylabel:str) -> None:
+    for i in range(len(df)-1):
+        plt.figure(figsize=(10, 6))
+        recepcionista=df['Recepcionista'][i]
+        plt.plot(df.columns[1:], df.iloc[i, 1:], marker='o', label=recepcionista)
+        plt.plot(df.columns[1:], df.iloc[-1, 1:], marker='o', label="Promedio")
+        plt.title(f"{titulo} de {recepcionista}")
+        plt.xlabel("Fechas")
+        plt.ylabel(ylabel)
+        plt.legend(loc='best')
+        plt.grid(True)
+        plt.show()
+
+def graphAll(df:pd.DataFrame, titulo:str, ylabel:str)->None:
     """ Grafica los datos del DataFrame 'df' dentro de todos los 
     
     """
@@ -43,7 +44,7 @@ def graphAll(df:pd.DataFrame, titulo:str, xlabel:str, ylabel:str)->None:
         plt.plot(df.columns[1:], df.iloc[i, 1:], marker='o', label=df['Recepcionista'][i])
 
     plt.title(titulo)
-    plt.xlabel(xlabel)
+    plt.xlabel("Fechas")
     plt.ylabel(ylabel)
     plt.legend(loc='best')
     plt.grid(True)

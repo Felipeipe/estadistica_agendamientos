@@ -8,7 +8,8 @@
 
 set /p nombre= Escribe tu nombre 
 set /p mail= Escribe tu correo electronico 
-echo pega el token de github que puedes obtener aquí:
+echo pega el token de github que puedes obtener aqui
+felipe:
 set /p token= https://github.com/settings/tokens 
 
 git config --global user.name "%nombre%"
