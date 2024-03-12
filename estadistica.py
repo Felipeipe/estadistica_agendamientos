@@ -17,4 +17,4 @@ if __name__=='__main__':
     diff_citas:pd.DataFrame  = func.generador_promedio(func.difference(citas_creadas,dias_trabajados))
     diff_cambio:pd.DataFrame = func.generador_promedio(func.difference(cambio_estado,dias_trabajados))
 
-    func.graph(diff_ventas,"Citas agendadas","Velocidad de agendamiento diario")
+    func.graph(diff_citas,"Citas agendadas","Velocidad de agendamiento diario")
