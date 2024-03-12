@@ -20,8 +20,9 @@ diff_cambio:pd.DataFrame = func.generador_promedio(func.difference(cambio_estado
 print("Si desea mostrar todos los graficos de los recepcionistas en uno solo escriba 'juntos'")
 decision=input("si no, puede escribir 'separados'")
 
-grafico=func.juntos_o_Separados(decision,
-                                diff_citas,
-                                "velocidad de agendamiento promedio",
-                                "Agendamiento de citas")
+func.juntos_o_Separados(decision,
+                            diff_citas,
+                            "velocidad de agendamiento promedio",
+                            "Agendamiento de citas")
+
 
