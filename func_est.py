@@ -78,4 +78,13 @@ def generador_promedio(df:pd.DataFrame)->pd.DataFrame:
     df0 = pd.concat([df0, nueva_fila])
     return df0
 
+def juntos_o_Separados(decision:str, df:pd.DataFrame, ylabel:str, titulo:str):
+    if decision.lower() == "juntos":
+        return graphAll(df,titulo,ylabel)
+    elif decision.lower() == "separados":
+        return graph(df,titulo,ylabel)
+    else:
+        return juntos_o_Separados(input(f"Recuerda ingresar un valor requerido valido (juntos/separados)\n(no {decision})"),df,ylabel,titulo)
 
+if __name__=='__main__':
+    print(f"tipo de graph es {type(graph)},\ntipo de graphAll es {type(graphAll)}")
