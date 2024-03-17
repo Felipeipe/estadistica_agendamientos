@@ -25,8 +25,12 @@ func.juntos_o_Separados(decision,
                             "velocidad de agendamiento promedio",
                             "Agendamiento de citas")
 
+func.juntos_o_Separados(decision,
+                            diff_ventas,
+                            "Cantidad de boletas creadas diariamente",
+                            "Ventas ingresadas")
 
-<<<<<<< HEAD
-    func.graph(diff_citas,"Citas agendadas","Velocidad de agendamiento diario")
-=======
->>>>>>> c0e225361bda7dd866d6283013d32ece7bb0ecfe
+func.juntos_o_Separados(decision,
+                            diff_cambio,
+                            "Cambio de estado de citas",
+                            "Cambio de estado de citas")
